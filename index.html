@@ -1,0 +1,77 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>CREA STUDIO · 홈페이지 시안</title><link rel="preload" href="assets/Gaegu-Bold.ttf" as="font" type="font/ttf" crossorigin><style>
+*{box-sizing:border-box}body{margin:0;background:#f9f6ef;color:#243d31;font:16px/1.65 system-ui,sans-serif}header,main,footer{width:min(1120px,90%);margin:auto}header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:24px 0;border-bottom:1px solid #c9d0c3}strong{letter-spacing:.12em}nav{display:flex;gap:18px;flex-wrap:wrap}a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:38px;align-items:center;padding:58px 0 42px}.hero h1{font-size:clamp(34px,5vw,63px);line-height:1.18;letter-spacing:-.085em;margin:12px 0 20px}.hero p{margin:0 0 20px}.tag{letter-spacing:.11em;font-size:.8rem}.button{display:inline-block;background:#244a37;color:white;padding:9px 17px;border-radius:4px;margin:0 8px 8px 0}.secondary{background:transparent;color:#244a37;border:1px solid #244a37}.feature{background:#dce8cd;min-height:260px;border-radius:90px 90px 10px 10px;display:grid;place-content:center;text-align:center;padding:24px}.feature b{font-size:clamp(34px,5vw,66px);letter-spacing:-.09em}.feature span{color:#415640}.works{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{padding:22px;min-height:125px;border-radius:9px;background:#f1e5c7}.card:nth-child(2){background:#e4e9e9}.card:nth-child(3){background:#eedfe4}.card h3{margin:0 0 6px}.card p{margin:0}section{margin-bottom:36px}footer{border-top:1px solid #c9d0c3;padding:20px 0}h2{margin-bottom:12px}@media(max-width:680px){.hero,.works{grid-template-columns:1fr}header{align-items:start;flex-direction:column}.hero{padding-top:32px}.feature{min-height:175px}}
+
+@font-face {
+  font-family: Gaegu;
+  src: url("assets/Gaegu-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+.hero h1 {
+  font-family: Gaegu, system-ui, sans-serif;
+  letter-spacing: -.045em;
+  overflow-wrap: anywhere;
+}
+.headline-line { position: relative; display: grid; }
+.typed-line { position: absolute; inset: 0; }
+.is-typing .headline-full { visibility: hidden; }
+.typed-line[hidden], .type-cursor[hidden] { display: none; }
+.type-cursor {
+  display: inline-block;
+  inline-size: .12em;
+  block-size: .8em;
+  vertical-align: -.04em;
+}
+.typed-line .type-cursor {
+  border-inline-start: .05em solid currentColor;
+  animation: blink .8s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+</style><header><strong>CREA STUDIO</strong><nav aria-label="주 메뉴"><a href="#works">작품</a><a href="#about">소개</a><a href="#contact">제작 문의</a></nav></header><main><section class="hero"><div><span class="tag">김은희 · 일러스트레이터 &amp; 시각디자이너</span><h1 aria-label="이야기를 캐릭터로, 기억을 추억의 그림으로">
+  <span class="headline-line"><span class="headline-full">이야기를 캐릭터로,<span class="type-cursor" aria-hidden="true"></span></span><span class="typed-line" hidden aria-hidden="true"></span></span>
+  <span class="headline-line"><span class="headline-full">기억을 추억의 그림으로<span class="type-cursor" aria-hidden="true"></span></span><span class="typed-line" hidden aria-hidden="true"></span></span>
+</h1><p>캐릭터와 일러스트를 그리고, 포스터와 활동지까지 디자인합니다.</p><a class="button" href="#works">작품 보기</a><a class="button secondary" href="#contact">제작 문의</a></div><div class="feature"><span>대표 캐릭터</span><b>퍼주는 꼴리</b><span>작품 이미지 자리</span></div></section><section id="works"><h2>대표 작업</h2><div class="works"><article class="card"><h3>퍼주는 꼴리</h3><p>캐릭터 · 이모티콘</p></article><article class="card"><h3>철도문화해설사 워크숍</h3><p>행사 포스터</p></article><article class="card"><h3>말씀카드</h3><p>일러스트 · 그림카드</p></article></div></section><section id="about"><h2>김은희 소개</h2><p>시각디자인과 미술교육을 가르쳤으며, 캐릭터와 포스터를 만들고 그림책을 기획합니다.</p></section><section id="contact"><h2>프로젝트 문의</h2><p>문의 양식에 들어갈 항목은 프로젝트 용도, 필요한 결과물, 희망 일정, 예산 범위입니다.</p><small>수업용 시안 · 문의 접수 준비 중</small></section></main><footer>CREA STUDIO · 홈페이지 시안</footer>
+<script>
+  async function animateHeadline() {
+    const motionPreference = matchMedia('(prefers-reduced-motion: reduce)');
+    if (motionPreference.matches) return;
+
+    const headline = document.querySelector('.hero h1');
+    const lines = [...headline.querySelectorAll('.headline-full')].map(
+      (line) => Array.from(line.textContent)
+    );
+    const targets = [...headline.querySelectorAll('.typed-line')];
+    const cursor = document.createElement('span');
+    cursor.className = 'type-cursor';
+
+    await document.fonts.ready;
+    if (motionPreference.matches) return;
+
+    const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    headline.classList.add('is-typing');
+    targets.forEach((target) => { target.hidden = false; });
+
+    while (!motionPreference.matches) {
+      targets.forEach((target) => target.replaceChildren());
+      targets[0].append(cursor);
+
+      for (const [index, characters] of lines.entries()) {
+        const target = targets[index];
+        const text = document.createTextNode('');
+        for (const character of characters) {
+          await pause(120);
+          if (motionPreference.matches) break;
+          target.append(text, cursor);
+          text.appendData(character);
+        }
+      }
+      if (!motionPreference.matches) await pause(2000);
+    }
+
+    headline.classList.remove('is-typing');
+    targets.forEach((target) => { target.hidden = true; });
+  }
+
+  animateHeadline();
+</script>
+</html>
